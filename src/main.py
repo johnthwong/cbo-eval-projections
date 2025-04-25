@@ -31,7 +31,7 @@ for component in components:
 
     print(f"Analyzing {component} data")
     projection_data = merge_data(dfs, component)
-    projection_errors = calc_errors(projection_data, component)
+    projection_errors = calc_errors(projection_data, component, adjust = False)
     summary_stats = calc_summary_stats(projection_errors, component)
     print("    Projection errors and summary stats calculated")
 

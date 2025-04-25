@@ -1,4 +1,4 @@
-def calc_errors(merged_data, component):
+def calc_errors(merged_data, component, adjust = True):
     """
     Calculate projection error statistics for a given budgetary component.
 
@@ -35,10 +35,14 @@ def calc_errors(merged_data, component):
     merged_data["adjusted_projection"] = (
         merged_data["value"] + merged_data[f"legislative_{component}_change"]
     )
-
-    merged_data["projection_error"] = (
-        merged_data["adjusted_projection"] - merged_data["actual_value"]
-    )
+    if adjust is True:
+        merged_data["projection_error"] = (
+            merged_data["adjusted_projection"] - merged_data["actual_value"]
+        )
+    else:
+        merged_data["projection_error"] = (
+            merged_data["value"] - merged_data["actual_value"]
+        )
 
     if component == "deficit":
         merged_data["projection_error"] *= -1
